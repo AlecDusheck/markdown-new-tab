@@ -476,17 +476,32 @@ const dragModal = (name) => {
 const timeDisplay = () => {
     const timeEl = getHtmlElement('#time');
     setInterval(() => {
-        const today = new Date();
+        // const today = new Date();
+        //
+        // const day     = today.getDate()        < 10 ? '0' + today.getDate()        : today.getDate();
+        // const month   = (today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
+        // const year    = today.getFullYear()    < 10 ? '0' + today.getFullYear()    : today.getFullYear();
+        //
+        // const unit = today.getHours() < 12 ? 'AM' : 'PM';
+        //
+        // const hour    = today.getHours()       < 12 ? today.getHours()       : 11 - today.getHours();
+        // const minute  = today.getMinutes()     < 10 ? '0' + today.getMinutes()     : today.getMinutes();
+        // const seconds = today.getSeconds()     < 10 ? '0' + today.getSeconds()     : today.getSeconds();
+        //
+        // const output = `${day}/${month}/${year} - ${hour}:${minute}:${seconds}`;
+        const date = new Date();
+        const unit = (date.getHours() < 12) ? 'AM' : 'PM';
+        let hour = (date.getHours() < 12) ? date.getHours() : date.getHours() - 12;
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let month = date.getMonth();
 
-        const day     = today.getDate()        < 10 ? '0' + today.getDate()        : today.getDate();
-        const month   = (today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
-        const year    = today.getFullYear()    < 10 ? '0' + today.getFullYear()    : today.getFullYear();
-        const hour    = today.getHours()       < 10 ? '0' + today.getHours()       : today.getHours();
-        const minute  = today.getMinutes()     < 10 ? '0' + today.getMinutes()     : today.getMinutes();
-        const seconds = today.getSeconds()     < 10 ? '0' + today.getSeconds()     : today.getSeconds();
+        if(hour < 10) hour = '0' + hour;
+        if(minutes < 10) minutes = '0' + minutes;
+        if(seconds < 10) seconds = '0' + seconds;
+        if(month < 10) month = '0' + month;
 
-        const output = `${day}/${month}/${year} - ${hour}:${minute}:${seconds}`;
-        timeEl.innerHTML = output;
+        timeEl.innerHTML = `${date.getDate()}/${month}/${date.getFullYear()} - ${hour}:${minutes}:${seconds} ${unit}`;
     }, 1000);
 };
 
